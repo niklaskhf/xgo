@@ -9,6 +9,7 @@
 # Needed environment variables:
 #   REPO_REMOTE    - Optional VCS remote if not the primary repository is needed
 #   REPO_BRANCH    - Optional VCS branch to use, if not the master branch
+#   REPO_TAG       - Optional VCS tag to use
 #   DEPS           - Optional list of C dependency packages to build
 #   ARGS           - Optional arguments to pass to C dependency configure scripts
 #   PACK           - Optional sub-package, if not the import path is being built
@@ -73,7 +74,7 @@ else
   cd $GOPATH_ROOT/$1
 
   # Switch over the code-base to another checkout if requested
-  if [ "$REPO_REMOTE" != "" ] || [ "$REPO_BRANCH" != "" ]; then
+  if [ "$REPO_REMOTE" != "" ] || [ "$REPO_BRANCH" != "" ] || [ "$REPO_TAG" != "" ]; then
     # Detect the version control system type
     IMPORT_PATH=$1
     while [ "$IMPORT_PATH" != "." ] && [ "$REPO_TYPE" == "" ]; do
@@ -109,6 +110,16 @@ else
         git clean -dxf
       elif [ "$REPO_TYPE" == "hg" ]; then
         hg checkout $REPO_BRANCH
+      fi
+    fi
+
+    if [ "$REPO_TAG" != "" ]; then 
+      echo "Switching over to tag $REPO_TAG..."
+      if [ "$REPO_TYPE" == "git" ]; then 
+        git reset --hard tags/$REPO_TAG
+        git clean -dxf
+      elif [ "$REPO_TYPE" == "hg" ]; then 
+        hg up $REPO_TAG
       fi
     fi
   fi

@@ -141,6 +141,11 @@ the desired branch name through the `--branch` argument.
     -rwxr-xr-x  1 root  root   5415424 Nov 24 16:40 goimports-windows-4.0-amd64.exe
 
 
+### Tag selection
+
+Tags can be selected using the `--tag` argument.  
+  
+
 ### Remote selection
 
 Yet again similarly to `go get`, xgo uses the repository remote corresponding to
@@ -226,7 +231,7 @@ supported by the requested Android platform version. For iOS frameworks `xgo`
 will bundle armv7 and arm64 by default, and also the x86_64 simulator builds
 if the iPhoneSimulator.sdk was injected by the user:
 
-* Create a new docker image based on xgo: `FROM karalabe/xgo-latest`
+* Create a new docker image based on xgo: `FROM niklaskhf/xgo-latest`
 * Inject the simulator SDK: `ADD iPhoneSimulator9.3.sdk.tar.xz /iPhoneSimulator9.3.sdk.tar.xz`
 * Bootstrap the simulator SDK: `$UPDATE_IOS /iPhoneSimulator9.3.sdk.tar.xz`
 
