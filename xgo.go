@@ -44,7 +44,6 @@ var dockerDist = "niklaskhf/xgo-"
 
 // Command line arguments to fine tune the compilation
 var (
-	goVersion   = flag.String("go", "latest", "Go release to use for cross compilation")
 	srcPackage  = flag.String("pkg", "", "Sub-package to build if not root import")
 	srcRemote   = flag.String("remote", "", "Version control remote repository to build")
 	srcBranch   = flag.String("branch", "", "Version control branch to build")
@@ -111,7 +110,7 @@ func main() {
 			log.Fatalf("Usage: %s [options] <go import path>", os.Args[0])
 		}
 		// Select the image to use, either official or custom
-		image = dockerDist + *goVersion
+		image = dockerDist + "latest"
 		if *dockerImage != "" {
 			image = *dockerImage
 		}
