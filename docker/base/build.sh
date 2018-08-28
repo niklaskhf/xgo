@@ -61,6 +61,7 @@ else
   # Inject all possible Godep paths to short circuit go gets
   GOPATH_ROOT=$GOPATH/src
   IMPORT_PATH=$1
+  echo $IMPORT_PATH
   while [ "$IMPORT_PATH" != "." ]; do
     export GOPATH=$GOPATH:$GOPATH_ROOT/$IMPORT_PATH/Godeps/_workspace
     IMPORT_PATH=`dirname $IMPORT_PATH`
