@@ -53,10 +53,8 @@ Simply specify the import path you want to build, and xgo will do the rest:
     ...
 
     $ ls -al
-    -rwxr-xr-x  1 root  root    9995000 Nov 24 16:44 iris-android-16-arm
     -rwxr-xr-x  1 root  root    6776500 Nov 24 16:44 iris-darwin-10.6-386
     -rwxr-xr-x  1 root  root    8755532 Nov 24 16:44 iris-darwin-10.6-amd64
-    -rwxr-xr-x  1 root  root    7114176 Nov 24 16:45 iris-ios-5.0-arm
     -rwxr-xr-x  1 root  root   10135248 Nov 24 16:44 iris-linux-386
     -rwxr-xr-x  1 root  root   12598472 Nov 24 16:44 iris-linux-amd64
     -rwxr-xr-x  1 root  root   10040464 Nov 24 16:44 iris-linux-arm
@@ -90,10 +88,8 @@ file prefix. This can be overridden with the `-out` flag.
     ...
 
     $ ls -al
-    -rwxr-xr-x  1 root  root   9995000 Nov 24 16:44 iris-v0.3.2-android-16-arm
     -rwxr-xr-x  1 root  root   6776500 Nov 24 16:44 iris-v0.3.2-darwin-10.6-386
     -rwxr-xr-x  1 root  root   8755532 Nov 24 16:44 iris-v0.3.2-darwin-10.6-amd64
-    -rwxr-xr-x  1 root  root   7114176 Nov 24 16:45 iris-v0.3.2-ios-5.0-arm
     -rwxr-xr-x  1 root  root  10135248 Nov 24 16:44 iris-v0.3.2-linux-386
     -rwxr-xr-x  1 root  root  12598472 Nov 24 16:44 iris-v0.3.2-linux-amd64
     -rwxr-xr-x  1 root  root  10040464 Nov 24 16:44 iris-v0.3.2-linux-arm
@@ -111,10 +107,8 @@ the desired branch name through the `--branch` argument.
     ...
 
     $ ls -al
-    -rwxr-xr-x  1 root  root   4171248 Nov 24 16:40 goimports-android-16-arm
     -rwxr-xr-x  1 root  root   4139868 Nov 24 16:40 goimports-darwin-10.6-386
     -rwxr-xr-x  1 root  root   5186720 Nov 24 16:40 goimports-darwin-10.6-amd64
-    -rwxr-xr-x  1 root  root   3202364 Nov 24 16:40 goimports-ios-5.0-arm
     -rwxr-xr-x  1 root  root   4189456 Nov 24 16:40 goimports-linux-386
     -rwxr-xr-x  1 root  root   5264136 Nov 24 16:40 goimports-linux-amd64
     -rwxr-xr-x  1 root  root   4209416 Nov 24 16:40 goimports-linux-arm
@@ -149,10 +143,8 @@ parameter to select the exact package within, honoring any prior *branch* and
     ...
 
     $ ls -al
-    -rwxr-xr-x  1 root  root   4194956 Nov 24 16:38 goimports-android-16-arm
     -rwxr-xr-x  1 root  root   4164448 Nov 24 16:38 goimports-darwin-10.6-386
     -rwxr-xr-x  1 root  root   5223584 Nov 24 16:38 goimports-darwin-10.6-amd64
-    -rwxr-xr-x  1 root  root   3222848 Nov 24 16:39 goimports-ios-5.0-arm
     -rwxr-xr-x  1 root  root   4217184 Nov 24 16:38 goimports-linux-386
     -rwxr-xr-x  1 root  root   5295768 Nov 24 16:38 goimports-linux-amd64
     -rwxr-xr-x  1 root  root   4233120 Nov 24 16:38 goimports-linux-arm
@@ -177,7 +169,7 @@ argument:
 
 The supported targets are:
 
- * Platforms: `android`, `darwin`, `ios`, `linux`, `windows`
+ * Platforms: `darwin`, `linux`, `windows`
  * Achitectures: `386`, `amd64`, `arm-5`, `arm-6`, `arm-7`, `arm64`, `mips`, `mipsle`, `mips64`, `mips64le`
 
 ### Platform versions
@@ -188,33 +180,14 @@ versions of the same operating system. This however can lead to issues if a used
 dependency is only supported by more recent systems. As such, `xgo` supports the
 selection of specific platform versions by appending them to the OS target string.
 
- * `--targets=ios-8.1/*`: cross compile to iOS 8.1
- * `--targets=android-16/*`: cross compile to Android Jelly Bean
  * `--targets=darwin-10.9/*`: cross compile to Mac OS X Mavericks
  * `--targets=windows-6.0/*`: cross compile to Windows Vista
 
 The supported platforms are:
 
- * All Android APIs up to Android Lollipop 5.0 ([API level ids](https://source.android.com/source/build-numbers.html))
  * All Windows APIs up to Windows 8.1 limited by `mingw-w64` ([API level ids](https://en.wikipedia.org/wiki/Windows_NT#Releases))
  * OSX APIs in the range of 10.6 - 10.11
- * All iOS APIs up to iOS 9.3
 
-### Mobile libraries
-
-Apart from the usual runnable binaries, `xgo` also supports building library
-archives for Android (`android/aar`) and iOS (`ios/framework`). Opposed to
-`gomobile` however `xgo` does not derive library APIs from the Go code, so
-proper CGO C external methods must be defined within the package.
-
-In the case of Android archives, all architectures will be bundled that are
-supported by the requested Android platform version. For iOS frameworks `xgo`
-will bundle armv7 and arm64 by default, and also the x86_64 simulator builds
-if the iPhoneSimulator.sdk was injected by the user:
-
-* Create a new docker image based on xgo: `FROM niklaskhf/xgo-latest`
-* Inject the simulator SDK: `ADD iPhoneSimulator9.3.sdk.tar.xz /iPhoneSimulator9.3.sdk.tar.xz`
-* Bootstrap the simulator SDK: `$UPDATE_IOS /iPhoneSimulator9.3.sdk.tar.xz`
 
 ### CGO dependencies
 
@@ -247,12 +220,10 @@ Some trivial arguments may be passed to the dependencies' configure script via
 `--depsargs`.
 
     $ xgo --deps=https://gmplib.org/download/gmp/gmp-6.1.0.tar.bz2  \
-        --targets=ios/* --depsargs=--disable-assembly               \
+        --targets=linux/* --depsargs=--disable-assembly               \
         github.com/ethereum/go-ethereum/cmd/geth
     ...
 
-    $ ls -al
-    -rwxr-xr-x 1 root root 14804160 Nov 24 16:32 geth-ios-5.0-arm
-
+    
 Note, that since xgo needs to cross compile the dependencies for each platform
 and architecture separately, build time can increase significantly.
