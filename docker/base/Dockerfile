@@ -61,6 +61,11 @@ RUN \
 ADD patch.tar.xz $OSX_NDK_X86/SDK/$OSX_SDK/usr/include/c++
 ENV PATH $OSX_NDK_X86/bin:$PATH
 
+# Build cross compilers for musl
+ADD config.mak /config.mak 
+ENV MUSL_CROSS /build_musl_gcc.sh
+RUN chmod +x $MUSL_CROSS 
+
 # Inject the old Go package downloader and tool-chain bootstrapper
 ADD bootstrap.sh /bootstrap.sh
 ENV BOOTSTRAP /bootstrap.sh
