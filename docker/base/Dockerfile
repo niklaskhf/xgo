@@ -63,6 +63,7 @@ ENV PATH $OSX_NDK_X86/bin:$PATH
 
 # Build cross compilers for musl
 ADD config.mak /config.mak 
+ADD build_musl_gcc.sh /build_musl_gcc.sh
 ENV MUSL_CROSS /build_musl_gcc.sh
 RUN chmod +x $MUSL_CROSS 
 
