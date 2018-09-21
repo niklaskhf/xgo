@@ -24,3 +24,6 @@ make install
 
 # List the available musl cross compilers
 ls /opt/cross
+
+# Echo PATH for debugging
+echo $PATH
