@@ -21,3 +21,6 @@ cd musl-cross-make
 
 # Install the toolchain to /usr/share and /opt/cross (TODO: Figure out which one we need)
 make install
+
+# List the available musl cross compilers
+ls /opt/cross
