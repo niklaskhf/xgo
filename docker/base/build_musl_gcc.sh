@@ -14,13 +14,23 @@
 # Clone the repo
 git clone https://github.com/richfelker/musl-cross-make.git
 
-# Get the config
-mv config.mak ./musl-cross-make/config.mak
 
 cd musl-cross-make 
 
-# Install the toolchain to /usr/share and /opt/cross (TODO: Figure out which one we need)
+# Install the i386-linux-musl to /opt/cross
+mv ../config_i386.mak ./config.mak
 make install
+rm ./config.mak
+
+# Install the x86_64-linux-musl to /opt/cross
+mv ../config_x86_64.mak ./config.mak
+make install 
+rm ./config.mak
+
+# Install the arm-linux-musleabihf
+mv ../config_armhf.mak ./config.mak
+make install
+rm ./config.mak
 
 # Add binaries to path
 export PATH="$PATH:/opt/cross/bin"
