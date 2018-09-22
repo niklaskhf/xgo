@@ -62,7 +62,9 @@ ADD patch.tar.xz $OSX_NDK_X86/SDK/$OSX_SDK/usr/include/c++
 ENV PATH $OSX_NDK_X86/bin:$PATH
 
 # Build cross compilers for musl
-ADD config.mak /config.mak 
+ADD config_armhf.mak /config_armhf.mak 
+ADD config_i386.mak /config_i386.mak
+ADD config_x86_64.mak /config_x86_64.mak
 ADD build_musl_gcc.sh /build_musl_gcc.sh
 ENV MUSL_CROSS /build_musl_gcc.sh
 RUN chmod +x $MUSL_CROSS 
