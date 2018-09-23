@@ -34,3 +34,7 @@ rm ./config.mak
 
 # Add binaries to path
 export PATH="$PATH:/opt/cross/bin"
+
+# List cross-compilers
+ls /opt/cross
+ls /opt/cross/bin

@@ -24,9 +24,10 @@
 #   GO_VERSION     - Bootstrapped version of Go to disable uncupported targets
 #   EXT_GOPATH     - GOPATH elements mounted from the host filesystem
 
-ls /opt/cross 
 
-echo $PATH
+
+# Build the cross compilers
+$MUSL_CROSS
 
 
 # Define a function that figures out the binary extension
