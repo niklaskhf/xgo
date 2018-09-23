@@ -26,9 +26,6 @@
 
 
 
-# Build the cross compilers
-$MUSL_CROSS
-
 
 # Define a function that figures out the binary extension
 function extension {

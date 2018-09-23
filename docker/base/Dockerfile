@@ -68,6 +68,10 @@ ADD config_x86_64.mak /config_x86_64.mak
 ADD build_musl_gcc.sh /build_musl_gcc.sh
 ENV MUSL_CROSS /build_musl_gcc.sh
 RUN chmod +x $MUSL_CROSS 
+RUN $MUSL_CROSS
+
+# Check if binaries were built
+RUN ls /opt/cross
 
 # Inject the old Go package downloader and tool-chain bootstrapper
 ADD bootstrap.sh /bootstrap.sh
