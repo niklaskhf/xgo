@@ -302,7 +302,7 @@ for TARGET in $TARGETS; do
       export PKG_CONFIG_PATH=/usr/mips-linux-gnu/lib/pkgconfig
 
       CC=mips-linux-musl-gcc CXX=mips-linux-gnu-g++-5 GOOS=linux GOARCH=mips CGO_ENABLED=1 go get $V $X "${T[@]}" --ldflags="$V $LD" -d ./$PACK
-      CC=mips-linux-musl-gcc CXX=mips-linux-gnu-g++-5 GOOS=linux GOARCH=mips CGO_ENABLED=1 go build $V $X "${T[@]}" --ldflags="$V $LD" $BM -o "/build/$NAME-linux-mips`extension linux`" ./$PACK
+      CC=mips-linux-musl-gcc CXX=mips-linux-gnu-g++-5 GOOS=linux GOARCH=mips CGO_ENABLED=1 go build $V $X "${T[@]}" --ldflags="$V $LD" $BM -o "/build/$NAME-linux-mips-musl`extension linux`" ./$PACK
 
     fi
   fi
