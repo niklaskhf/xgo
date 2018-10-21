@@ -239,7 +239,7 @@ for TARGET in $TARGETS; do
       echo "Bootstrapping linux/arm-7-musl..."
       CC=arm-linux-musleabihf-gcc GOOS=linux GOARCH=arm GOARM=7 CGO_ENABLED=1 CGO_CFLAGS="-march=armv7-a" CGO_CXXFLAGS="-march=armv7-a" go install std
 
-      echo "Compiling for linux/arm-7..."
+      echo "Compiling for linux/arm-7-musl..."
       CC=arm-linux-musleabihf-gcc CXX=arm-linux-gnueabihf-g++-5 HOST=arm-linux-gnueabihf PREFIX=/usr/arm-linux-gnueabihf CFLAGS="-march=armv7-a -fPIC" CXXFLAGS="-march=armv7-a -fPIC" $BUILD_DEPS /deps ${DEPS_ARGS[@]}
       export PKG_CONFIG_PATH=/usr/arm-linux-gnueabihf/lib/pkgconfig
 
@@ -296,6 +296,14 @@ for TARGET in $TARGETS; do
 
       CC=mips-linux-gnu-gcc-5 CXX=mips-linux-gnu-g++-5 GOOS=linux GOARCH=mips CGO_ENABLED=1 go get $V $X "${T[@]}" --ldflags="$V $LD" -d ./$PACK
       CC=mips-linux-gnu-gcc-5 CXX=mips-linux-gnu-g++-5 GOOS=linux GOARCH=mips CGO_ENABLED=1 go build $V $X "${T[@]}" --ldflags="$V $LD" $BM -o "/build/$NAME-linux-mips`extension linux`" ./$PACK
+
+      echo "Compiling for linux/mips-musl..."
+      CC=mips-linux-musl-gcc CXX=mips-linux-gnu-g++-5 HOST=mips-linux-gnu PREFIX=/usr/mips-linux-gnu $BUILD_DEPS /deps ${DEPS_ARGS[@]}
+      export PKG_CONFIG_PATH=/usr/mips-linux-gnu/lib/pkgconfig
+
+      CC=mips-linux-musl-gcc CXX=mips-linux-gnu-g++-5 GOOS=linux GOARCH=mips CGO_ENABLED=1 go get $V $X "${T[@]}" --ldflags="$V $LD" -d ./$PACK
+      CC=mips-linux-musl-gcc CXX=mips-linux-gnu-g++-5 GOOS=linux GOARCH=mips CGO_ENABLED=1 go build $V $X "${T[@]}" --ldflags="$V $LD" $BM -o "/build/$NAME-linux-mips`extension linux`" ./$PACK
+
     fi
   fi
   if ([ $XGOOS == "." ] || [ $XGOOS == "linux" ]) && ([ $XGOARCH == "." ] || [ $XGOARCH == "mipsle" ]); then

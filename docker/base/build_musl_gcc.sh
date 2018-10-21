@@ -32,6 +32,12 @@ mv ../config_armhf.mak ./config.mak
 make install
 rm ./config.mak
 
+# Install mips-linux-musl
+mv ../config_mips.mak ./config.mak
+make install 
+rm ./config.mak 
+
+
 # Add binaries to path
 export PATH="$PATH:/opt/cross/bin"
 
