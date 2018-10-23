@@ -18,22 +18,22 @@ git clone https://github.com/richfelker/musl-cross-make.git
 cd musl-cross-make 
 
 # Install the i386-linux-musl to /opt/cross
-mv ../config_i386.mak ./config.mak
+cp ../config_i386.mak ./config.mak
 make install
 rm ./config.mak
 
 # Install the x86_64-linux-musl to /opt/cross
-mv ../config_x86_64.mak ./config.mak
+cp ../config_x86_64.mak ./config.mak
 make install 
 rm ./config.mak
 
 # Install the arm-linux-musleabihf
-mv ../config_armhf.mak ./config.mak
+cp ../config_armhf.mak ./config.mak
 make install
 rm ./config.mak
 
 # Install mips-linux-musl
-mv ../config_mips.mak ./config.mak
+cp ../config_mips.mak ./config.mak
 make install 
 rm ./config.mak 
 

@@ -65,6 +65,7 @@ ENV PATH $OSX_NDK_X86/bin:$PATH
 ADD config_armhf.mak /config_armhf.mak 
 ADD config_i386.mak /config_i386.mak
 ADD config_x86_64.mak /config_x86_64.mak
+ADD config_mips.mak /config_mips.mak
 ADD build_musl_gcc.sh /build_musl_gcc.sh
 ENV MUSL_CROSS /build_musl_gcc.sh
 RUN chmod +x $MUSL_CROSS 
